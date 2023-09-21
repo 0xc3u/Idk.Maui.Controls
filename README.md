@@ -3,7 +3,7 @@
 
 `idk.Maui.Controls` provides assorted ui controls for your NET MAUI application.
 
-![Screenshot of the sample app](https://github.com/0xc3u/Idk.Maui.Controls/blob/main/screenshots/idk_controls_sample.png?raw=true)
+![Screenshot of the sample app](https://github.com/0xc3u/Idk.Maui.Controls/blob/main/screenshots/idk_controls_sample.png=250x)
 
 
 ## Build Status
