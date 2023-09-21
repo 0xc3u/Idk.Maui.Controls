@@ -11,29 +11,11 @@
 	
 	<VerticalStackLayout Padding="20" Spacing="10">
 
-			<ActivityIndicator IsRunning="{Binding IsBusy}"></ActivityIndicator>
-
-			<CollectionView ItemsSource="{Binding MenuItems}" ItemSizingStrategy="MeasureFirstItem">
-			<CollectionView.ItemTemplate>
-				<DataTemplate x:DataType="m2:MenuItem">
-					<Grid Padding="10" RowDefinitions="Auto, 5" ColumnDefinitions="*">
-						<Grid.GestureRecognizers>
-							<TapGestureRecognizer NumberOfTapsRequired="1"
-								Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=OpenViewCommand}"		
-								CommandParameter="{Binding .}" />
-						</Grid.GestureRecognizers>
-						<Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" FontAttributes="Bold" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start"></Label>
-						<Line Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource Primary}" HeightRequest="1" VerticalOptions="Center" HorizontalOptions="Center"></Line>
-					</Grid>
-				</DataTemplate>
-			</CollectionView.ItemTemplate>
-			</CollectionView>
-
-        <Label Text="Line Control" FontAttributes="Bold" TextColor="DarkViolet"></Label>
+        <Label Text="Line Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
         <idk:LineControl Stroke="4" LineColor="CornflowerBlue" HeightRequest="4" />
 
 
-        <Label Text="Context Help Control" FontAttributes="Bold" TextColor="DarkViolet"></Label>
+        <Label Text="Context Help Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
         <idk:ContextHelpControl
                           IconSize="24"
                           Caption="How can i find the QR-Code ?"
@@ -46,11 +28,10 @@
         </idk:ContextHelpControl>
 
 
-        <Label Text="Chip Control" FontAttributes="Bold" TextColor="DarkViolet"></Label>
+        <Label Text="Chips Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
         <idk:ChipsControl ItemSource="{Binding Chips}" 
                           AlignContent="Start"
-                          JustifyContent="Start" Wrap="Wrap"
-                        />
+                          JustifyContent="Start" Wrap="Wrap" />
 
 
     </VerticalStackLayout>

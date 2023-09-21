@@ -1,14 +1,16 @@
 ![](nuget.png)
 # idk.Maui.Controls
 
-`idk.Maui.Controls` provides assorted maui ui controls for your NET MAUI application.
+`idk.Maui.Controls` provides assorted ui controls for your NET MAUI application.
+
+![Screenshot of the sample app](https://github.com/0xc3u/Idk.Maui.Controls/blob/main/screenshots/idk_controls_sample.png?raw=true)
 
 
 ## Build Status
 ![ci](https://github.com/0xc3u/Idk.Maui.Controls/actions/workflows/ci.yml/badge.svg)
 
 
-## Install Plugin
+## Install Controls
 
 [![NuGet](https://img.shields.io/nuget/v/Idk.Maui.Controls.svg?label=NuGet)](https://www.nuget.org/packages/Idk.Maui.Controls/)
 
@@ -66,5 +68,28 @@ A simple ContextHelpControl that can be used to show a help icon with a caption,
 A simple Chips control that can be used to show a list of items that can be selected or not.
 
 **Bindable Properties**
-- ItemsSource `IEnumerable`
-- SelectedItems `IEnumerable`
+- ItemsSource `ObservableCollection<ChipItem>`
+- SelectedItems `ObservableCollection<ChipItem>`
+
+##### ChipItem
+Chip item is a simple class that can be used to define the items that will be shown in the chips control.
+
+**Bindable Properties**
+- Text `string`
+- TextColor `Color`
+- Icon = `ImageSource`
+- CloseIcon = `ImageSource`
+- BackgroundColor `Color`
+- SelectedBackgroundColor `Color`
+- DisabledBackgroundColor `Color`
+- CornerRadius `Float`
+- BorderColor `Color`
+- BorderSize `Float`
+- IsDisabled `bool`
+- IsCloseable `bool`
+- IsSelectedable `bool`
+- IsSelected `bool`
+- TabCommand `ICommand`
+- SelectCommand `ICommand`
+- UnSelectCommand `ICommand`
+- CloseCommand `ICommand`

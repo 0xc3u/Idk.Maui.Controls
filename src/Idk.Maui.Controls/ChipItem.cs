@@ -64,10 +64,10 @@ public class ChipItem : BindableObject
     }
 
     public static readonly BindableProperty BorderSizeProperty =
-        BindableProperty.Create(nameof(BorderSize), typeof(double), typeof(ChipItem), defaultValue: 2d);
-    public double BorderSize
+        BindableProperty.Create(nameof(BorderSize), typeof(float), typeof(ChipItem), defaultValue: 2f);
+    public float BorderSize
     {
-        get => (double)GetValue(BorderSizeProperty);
+        get => (float)GetValue(BorderSizeProperty);
         set => SetValue(BorderSizeProperty, value);
     }
 
