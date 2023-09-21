@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:Idk.Maui.Controls.Sample.ViewModels"
+			 xmlns:m2="clr-namespace:Idk.Maui.Controls.Sample.Models"
+             xmlns:idk="clr-namespace:Idk.Maui.Controls;assembly=Idk.Maui.Controls"
+             x:Class="Idk.Maui.Controls.Sample.MainPage"
+			 x:DataType="vm:MainPageViewModel"
+             Title="Idk.Maui.Controls Sample">
+
+	
+	<VerticalStackLayout Padding="20" Spacing="10">
+
+			<ActivityIndicator IsRunning="{Binding IsBusy}"></ActivityIndicator>
+
+			<CollectionView ItemsSource="{Binding MenuItems}" ItemSizingStrategy="MeasureFirstItem">
+			<CollectionView.ItemTemplate>
+				<DataTemplate x:DataType="m2:MenuItem">
+					<Grid Padding="10" RowDefinitions="Auto, 5" ColumnDefinitions="*">
+						<Grid.GestureRecognizers>
+							<TapGestureRecognizer NumberOfTapsRequired="1"
+								Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=OpenViewCommand}"		
+								CommandParameter="{Binding .}" />
+						</Grid.GestureRecognizers>
+						<Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" FontAttributes="Bold" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+						<Line Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource Primary}" HeightRequest="1" VerticalOptions="Center" HorizontalOptions="Center"></Line>
+					</Grid>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+			</CollectionView>
+
+        <Label Text="Line Control" FontAttributes="Bold" TextColor="DarkViolet"></Label>
+        <idk:LineControl Stroke="4" LineColor="DarkViolet" HeightRequest="4" />
+
+
+        <Label Text="Context Help Control" FontAttributes="Bold" TextColor="DarkViolet"></Label>
+        <idk:ContextHelpControl Icon="examination_icon.svg" 
+                          IconSize="48"
+                          Caption="How can i find the QR-Code ?"
+                          CaptionForegroundColor="CornflowerBlue"
+                          CaptionUnderline="True"
+                          Animate="True"
+                          Command="{Binding DisplayContextHelpCommand}"
+                                
+                          HelpId="4711-A"
+                          HorizontalOptions="Start">
+        </idk:ContextHelpControl>
+
+
+        <Label Text="Chip Control" FontAttributes="Bold" TextColor="DarkViolet"></Label>
+        <idk:ChipsControl ItemSource="{Binding Chips}" 
+                          AlignContent="Start"
+                          JustifyContent="Start" Wrap="Wrap"
+                        />
+
+
+    </VerticalStackLayout>
+
+
+</ContentPage>
