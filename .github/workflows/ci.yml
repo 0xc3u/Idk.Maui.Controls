@@ -16,4 +16,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build
-      run: dotnet build src\Idk.Maui.Controls.sln -c Release
+      run: dotnet build src\Indiko.Maui.Controls.sln -c Release

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:Indiko.Maui.Controls.Sample.ViewModels"
+			 xmlns:m2="clr-namespace:Indiko.Maui.Controls.Sample.Models"
+             xmlns:idk="clr-namespace:Indiko.Maui.Controls;assembly=Indiko.Maui.Controls"
+             x:Class="Indiko.Maui.Controls.Sample.MainPage"
+			 x:DataType="vm:MainPageViewModel"
+             Title="Indiko.Maui.Controls Sample">
+
+	
+	<VerticalStackLayout Padding="20" Spacing="10">
+
+        <Label Text="Line Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
+        <idk:LineControl Stroke="4" LineColor="CornflowerBlue" HeightRequest="4" />
+
+
+        <Label Text="Context Help Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
+        <idk:ContextHelpControl
+                          IconSize="24"
+                          Caption="How can i find the QR-Code ?"
+                          CaptionForegroundColor="CornflowerBlue"
+                          CaptionUnderline="True"
+                          Animate="True"
+                          Command="{Binding DisplayContextHelpCommand}"
+                          HelpId="4711-A"
+                          HorizontalOptions="Start">
+        </idk:ContextHelpControl>
+
+
+        <Label Text="Chips Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
+        <idk:ChipsControl ItemSource="{Binding Chips}" 
+                          AlignContent="Start"
+                          JustifyContent="Start" Wrap="Wrap" />
+
+
+    </VerticalStackLayout>
+
+
+</ContentPage>
