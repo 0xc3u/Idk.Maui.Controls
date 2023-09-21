@@ -20,8 +20,8 @@
 		<Authors>INDIKO</Authors>
 		<Copyright>Copyright © INDIKO and contributors</Copyright>
 		<IsPackable>True</IsPackable>
-		<PackageProjectUrl>https://github.com/0xc3u/Plugin.Maui.Health</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/0xc3u/Plugin.Maui.Health</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/0xc3u/Idk.Maui.Controls</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/0xc3u/Idk.Maui.Controls</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>dotnet-maui;maui;ui;controls;</PackageTags>
 		<IncludeSymbols>True</IncludeSymbols>
@@ -33,7 +33,6 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<DebugType>portable</DebugType>
-		<PackageIcon>nuget.png</PackageIcon>
 		
 	</PropertyGroup>
 
