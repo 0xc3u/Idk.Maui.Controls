@@ -184,6 +184,15 @@ public partial class ContextHelpControl : ContentView
         {
             var control = (ContextHelpControl)bindable;
             control.IconImage.Source = (ImageSource)newValue;
+
+            if(control.IconImage.Source == null)
+            {
+                control.IconImage.IsVisible = false;
+            }
+            else
+            {
+                control.IconImage.IsVisible = true;
+            }
         }
     }
 

@@ -32,15 +32,17 @@ public class QuestionMarkView : SKCanvasView
         {
             paint.Style = SKPaintStyle.Stroke;
             paint.Color = LineColor.ToSKColor();
-            paint.StrokeWidth = 4;
+            paint.StrokeWidth = 6;
             paint.IsAntialias = true;
             
             canvas.DrawCircle(centerX, centerY, radius, paint);
 
-            paint.TextSize = (radius + 0.25f);
+            paint.Style = SKPaintStyle.Fill;
+            paint.StrokeWidth = 0;
+            paint.TextSize = (radius * 1.45f);
             SKRect textBounds = new();
             paint.MeasureText("?", ref textBounds);
-            float textX = centerX - textBounds.Width / 2;
+            float textX = (centerX -2) - textBounds.Width / 2;
             float textY = centerY + textBounds.Height / 2;
             canvas.DrawText("?", textX, textY, paint);
         }

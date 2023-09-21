@@ -30,18 +30,17 @@
 			</CollectionView>
 
         <Label Text="Line Control" FontAttributes="Bold" TextColor="DarkViolet"></Label>
-        <idk:LineControl Stroke="4" LineColor="DarkViolet" HeightRequest="4" />
+        <idk:LineControl Stroke="4" LineColor="CornflowerBlue" HeightRequest="4" />
 
 
         <Label Text="Context Help Control" FontAttributes="Bold" TextColor="DarkViolet"></Label>
-        <idk:ContextHelpControl Icon="examination_icon.svg" 
-                          IconSize="48"
+        <idk:ContextHelpControl
+                          IconSize="24"
                           Caption="How can i find the QR-Code ?"
                           CaptionForegroundColor="CornflowerBlue"
                           CaptionUnderline="True"
                           Animate="True"
                           Command="{Binding DisplayContextHelpCommand}"
-                                
                           HelpId="4711-A"
                           HorizontalOptions="Start">
         </idk:ContextHelpControl>
