@@ -12,7 +12,7 @@
 
 ## Install Controls
 
-[![NuGet](https://img.shields.io/nuget/v/Idk.Maui.Controls.svg?label=NuGet)](https://www.nuget.org/packages/Idk.Maui.Controls/)
+[![NuGet](https://img.shields.io/nuget/v/Indiko.Maui.Controls.svg?label=NuGet)](https://www.nuget.org/packages/Indiko.Maui.Controls/)
 
 Available on [NuGet](http://www.nuget.org/packages/Idk.Maui.Controls).
 
