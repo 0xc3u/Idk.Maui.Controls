@@ -16,7 +16,7 @@
 
 Available on [NuGet](http://www.nuget.org/packages/Idk.Maui.Controls).
 
-Install with the dotnet CLI: `dotnet add package idk.Maui.Controls`, or through the NuGet Package Manager in Visual Studio.
+Install with the dotnet CLI: `dotnet add package Indiko.Maui.Controls`, or through the NuGet Package Manager in Visual Studio.
 
 
 ### Platform supported
