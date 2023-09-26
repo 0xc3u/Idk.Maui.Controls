@@ -1,4 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Indiko.Maui.Controls.Sample.Services;
@@ -25,7 +28,10 @@ public partial class MainPageViewModel : BaseViewModel
         return Task.CompletedTask;
     }
 
-    public override void OnAppearing(object param)
+    [ObservableProperty]
+    byte[] avatar;
+
+    public override async void OnAppearing(object param)
 	{
         Chips = new ObservableCollection<ChipItem>
         {
@@ -34,11 +40,25 @@ public partial class MainPageViewModel : BaseViewModel
                             SelectedBackgroundColor=Colors.DarkGray, TextColor=Colors.Black},
             new ChipItem{ Text ="Custom Icon, No Close", IsSelectedable = true, IsCloseable = false, Icon ="user.svg", BackgroundColor=Colors.LightGray, SelectedBackgroundColor=Colors.DarkGray, TextColor=Colors.Black},
             new ChipItem{ Text ="Default Close", IsSelectedable = true, IsCloseable = true, BackgroundColor=Colors.DarkViolet, SelectedBackgroundColor=Colors.DarkViolet, TextColor=Colors.White},
-            new ChipItem{ Text ="Disabled", IsDisabled = true, IsCloseable = false, BackgroundColor=Colors.DarkSlateBlue, SelectedBackgroundColor=Colors.DarkSlateBlue, DisabledBackgroundColor=Colors.LightGrey,  TextColor=Colors.Black},
+            new ChipItem{ Text ="Disabled", IsDisabled = true, IsCloseable = false, BackgroundColor=Colors.LightGrey, SelectedBackgroundColor=Colors.Grey, DisabledBackgroundColor=Colors.LightGrey,  TextColor=Colors.Grey},
             new ChipItem{ Text ="#MAUI", IsDisabled = true, IsCloseable = false, BackgroundColor=Colors.DarkSlateBlue, TextColor=Colors.White},
             new ChipItem{ Text ="#DOTNET", IsDisabled = true, IsCloseable = false, BackgroundColor=Colors.DarkSlateBlue, TextColor=Colors.White},
             new ChipItem{ Text ="#AWESOME", IsDisabled = true, IsCloseable = false, BackgroundColor=Colors.DarkSlateBlue, TextColor=Colors.White},
         };
 
+        Avatar = await RandomAvatar();
     }
+
+    public static async Task<byte[]> RandomAvatar()
+    {
+        var avatar = default(byte[]);
+
+        using (var client = new HttpClient())
+        {
+            avatar = await client.GetByteArrayAsync("https://i.pravatar.cc/150");
+        }
+
+        return avatar;
+    }
+
 }

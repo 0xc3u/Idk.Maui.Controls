@@ -8,8 +8,34 @@
 			 x:DataType="vm:MainPageViewModel"
              Title="Indiko.Maui.Controls Sample">
 
-	
-	<VerticalStackLayout Padding="20" Spacing="10">
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Label Text="Chips Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
+        <idk:ChipsControl ItemSource="{Binding Chips}" 
+                          AlignContent="Start"
+                          JustifyContent="Start" Wrap="Wrap" />
+
+        <Label Text="Avatar Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
+
+        <HorizontalStackLayout Spacing="10">
+            <idk:AvatarControl HorizontalOptions="Start" HasBorder="True" BorderSize="2" BorderColor="CornflowerBlue" 
+                   AvatarBackgroundColor="LightGrey" 
+                   Initials="IC" 
+                   InitialsTextColor="CornflowerBlue" 
+                   HeightRequest="25" 
+                   WidthRequest="25" />
+
+            <idk:AvatarControl HorizontalOptions="Start" HasBorder="True" BorderSize="2" BorderColor="CornflowerBlue" 
+                   AvatarBackgroundColor="LightGrey" 
+                   AvatarControlImage="{Binding Avatar}"
+                   Initials="IC" 
+                   InitialsTextColor="CornflowerBlue" 
+                   HeightRequest="25" 
+                   WidthRequest="25" />
+        </HorizontalStackLayout>
+        
+        
+
 
         <Label Text="Line Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
         <idk:LineControl Stroke="4" LineColor="CornflowerBlue" HeightRequest="4" />
@@ -17,22 +43,15 @@
 
         <Label Text="Context Help Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
         <idk:ContextHelpControl
-                          IconSize="24"
-                          Caption="How can i find the QR-Code ?"
-                          CaptionForegroundColor="CornflowerBlue"
-                          CaptionUnderline="True"
-                          Animate="True"
-                          Command="{Binding DisplayContextHelpCommand}"
-                          HelpId="4711-A"
-                          HorizontalOptions="Start">
+                    IconSize="24"
+                    Caption="How can i find the QR-Code ?"
+                    CaptionForegroundColor="CornflowerBlue"
+                    CaptionUnderline="True"
+                    Animate="True"
+                    Command="{Binding DisplayContextHelpCommand}"
+                    HelpId="4711-A"
+                    HorizontalOptions="Start">
         </idk:ContextHelpControl>
-
-
-        <Label Text="Chips Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
-        <idk:ChipsControl ItemSource="{Binding Chips}" 
-                          AlignContent="Start"
-                          JustifyContent="Start" Wrap="Wrap" />
-
 
     </VerticalStackLayout>
 

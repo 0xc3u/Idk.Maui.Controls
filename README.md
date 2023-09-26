@@ -27,7 +27,6 @@ Install with the dotnet CLI: `dotnet add package idk.Maui.Controls`, or through 
 | Android  |   21+   |
 
 
-
 ### Dependency Injection
 
 You will first need to register the `idk.maui.controls` with the `MauiAppBuilder` following the same pattern that the .NET MAUI Essentials libraries follow.
@@ -39,30 +38,6 @@ builder.UseMauiApp<App>()
 
 
 ### Controls available
-
-#### Line Control
-A simple Line control that can be used to separate content.
-_This control is rendered using Skiasharp_
-
-**Bindable Properties**
-- LineColor `Color`
-- Stroke `int`
-
-#### Context Help Control 
-A simple ContextHelpControl that can be used to show a help icon with a caption, when the user tabs on it a command is propagated for instance to show a popup with further help content.
-
-**Bindable Properties**
-- Icon `ImageSource`
-- IconSize `Double`
-- Caption `String`
-- CaptionLineBreakMode `LineBreakMode`
-- CaptionFontSize `double`
-- CaptionFontFamily `string`
-- CaptionForegroundColor `Color`
-- CaptionUnderline `bool`
-- Animate `bool`
-- Command `ICommand`
-
 
 #### Chips Control
 A simple Chips control that can be used to show a list of items that can be selected or not.
@@ -93,3 +68,41 @@ Chip item is a simple class that can be used to define the items that will be sh
 - SelectCommand `ICommand`
 - UnSelectCommand `ICommand`
 - CloseCommand `ICommand`
+
+#### Avatar Control
+A simple Avatar control that can be used to show a user avatar.
+_This control is rendered using Skiasharp_
+
+**Bindable Properties**
+- AvatarBackgroundColor `Color`
+- InitialsTextColor `Color`
+- BorderColor `Color`
+- AvatarControlImage `Byte[]`
+- Initials `string`
+- FontFamily `string`
+- BorderSize `int`
+- HasBorder `bool`
+
+
+#### Line Control
+A simple Line control that can be used to separate content.
+_This control is rendered using Skiasharp_
+
+**Bindable Properties**
+- LineColor `Color`
+- Stroke `int`
+
+#### Context Help Control 
+A simple ContextHelpControl that can be used to show a help icon with a caption, when the user tabs on it a command is propagated for instance to show a popup with further help content.
+
+**Bindable Properties**
+- Icon `ImageSource`
+- IconSize `Double`
+- Caption `String`
+- CaptionLineBreakMode `LineBreakMode`
+- CaptionFontSize `double`
+- CaptionFontFamily `string`
+- CaptionForegroundColor `Color`
+- CaptionUnderline `bool`
+- Animate `bool`
+- Command `ICommand`
