@@ -21,7 +21,7 @@ public class CheckboxControl : SKCanvasView
 	}
 
 
-	public static readonly BindableProperty CheckboxSizeProperty = BindableProperty.Create(nameof(Animate), typeof(float), typeof(CheckboxControl), defaultValue: 45f, propertyChanged: OnPropertyChanged);
+	public static readonly BindableProperty CheckboxSizeProperty = BindableProperty.Create(nameof(CheckboxSize), typeof(float), typeof(CheckboxControl), defaultValue: 45f, propertyChanged: OnPropertyChanged);
 	public float CheckboxSize
 	{
 		get => (float)GetValue(CheckboxSizeProperty);
