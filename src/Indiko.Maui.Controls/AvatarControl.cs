@@ -122,7 +122,15 @@ public class AvatarControl : SKCanvasView
         PaintSurface -= OnPaintSurface;
     }
 
-    private static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+	protected override void OnSizeAllocated(double width, double height)
+	{
+		base.OnSizeAllocated(width, height);
+
+		// Invalidate the surface to redraw the control when size changes
+		InvalidateSurface();
+	}
+
+	private static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var view = (AvatarControl)bindable;
         view.cachedBitmap?.Dispose();

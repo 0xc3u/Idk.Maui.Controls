@@ -19,7 +19,15 @@ public class XSymbolView : SKCanvasView
         view?.InvalidateSurface();
     }
 
-    protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
+	protected override void OnSizeAllocated(double width, double height)
+	{
+		base.OnSizeAllocated(width, height);
+
+		// Invalidate the surface to redraw the control when size changes
+		InvalidateSurface();
+	}
+
+	protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
     {
         base.OnPaintSurface(e);
         SKImageInfo info = e.Info;

@@ -34,8 +34,16 @@ public class LineControl : SKCanvasView
     {
         PaintSurface -= OnPaintSurface;
     }
+	
+    protected override void OnSizeAllocated(double width, double height)
+	{
+		base.OnSizeAllocated(width, height);
 
-    private static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+		// Invalidate the surface to redraw the control when size changes
+		InvalidateSurface();
+	}
+
+	private static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var view = (LineControl)bindable;
         view.cachedBitmap?.Dispose();

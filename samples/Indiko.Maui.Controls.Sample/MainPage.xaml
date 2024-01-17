@@ -38,7 +38,7 @@
 
 
         <Label Text="Line Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
-        <idk:LineControl Stroke="4" LineColor="CornflowerBlue" HeightRequest="4" />
+        <idk:LineControl Stroke="4" LineColor="CornflowerBlue" HeightRequest="4" WidthRequest="80" />
 
 
         <Label Text="Context Help Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
@@ -53,6 +53,9 @@
                     HorizontalOptions="Start">
         </idk:ContextHelpControl>
 
+        <Label Text="Checkbox Control" FontAttributes="Bold" TextColor="{StaticResource Primary}"></Label>
+        <idk:CheckboxControl x:Name="chkHelloWorld" Text="Hello World" Stroke="5" CheckboxSize="65" IsChecked="False" ForegroundColor="CornflowerBlue" BackgroundColor="White"></idk:CheckboxControl>
+      
     </VerticalStackLayout>
 
 

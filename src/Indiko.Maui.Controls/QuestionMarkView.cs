@@ -47,4 +47,12 @@ public class QuestionMarkView : SKCanvasView
             canvas.DrawText("?", textX, textY, paint);
         }
     }
+
+	protected override void OnSizeAllocated(double width, double height)
+	{
+		base.OnSizeAllocated(width, height);
+
+		// Invalidate the surface to redraw the control when size changes
+		InvalidateSurface();
+	}
 }
