@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Shapes;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 
 namespace Indiko.Maui.Controls;
@@ -43,6 +45,16 @@ public class MarkdownView : ContentView
         set => SetValue(H1ColorProperty, value);
     }
 
+    public static readonly BindableProperty H1FontSizeProperty =
+      BindableProperty.Create(nameof(H1FontSize), typeof(double), typeof(MarkdownView), defaultValue: 24d, propertyChanged: OnMarkdownTextChanged);
+
+    [TypeConverter(typeof(FontSizeConverter))]
+    public double H1FontSize
+    {
+        get => (double)GetValue(H1FontSizeProperty);
+        set => SetValue(H1FontSizeProperty, value);
+    }
+
     // H2Color property
     public static readonly BindableProperty H2ColorProperty =
         BindableProperty.Create(nameof(H2Color), typeof(Color), typeof(MarkdownView), Colors.DarkGray, propertyChanged: OnMarkdownTextChanged);
@@ -51,6 +63,16 @@ public class MarkdownView : ContentView
     {
         get => (Color)GetValue(H2ColorProperty);
         set => SetValue(H2ColorProperty, value);
+    }
+
+    public static readonly BindableProperty H2FontSizeProperty =
+     BindableProperty.Create(nameof(H2FontSize), typeof(double), typeof(MarkdownView), defaultValue: 20d, propertyChanged: OnMarkdownTextChanged);
+
+    [TypeConverter(typeof(FontSizeConverter))]
+    public double H2FontSize
+    {
+        get => (double)GetValue(H2FontSizeProperty);
+        set => SetValue(H2FontSizeProperty, value);
     }
 
     // H3Color property
@@ -63,6 +85,16 @@ public class MarkdownView : ContentView
         set => SetValue(H3ColorProperty, value);
     }
 
+    public static readonly BindableProperty H3FontSizeProperty =
+     BindableProperty.Create(nameof(H3FontSize), typeof(double), typeof(MarkdownView), defaultValue: 18d, propertyChanged: OnMarkdownTextChanged);
+
+    [TypeConverter(typeof(FontSizeConverter))]
+    public double H3FontSize
+    {
+        get => (double)GetValue(H3FontSizeProperty);
+        set => SetValue(H3FontSizeProperty, value);
+    }
+
     public static readonly BindableProperty TextColorProperty =
        BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(MarkdownView), Colors.Black, propertyChanged: OnMarkdownTextChanged);
 
@@ -70,6 +102,16 @@ public class MarkdownView : ContentView
     {
         get => (Color)GetValue(TextColorProperty);
         set => SetValue(TextColorProperty, value);
+    }
+
+    public static readonly BindableProperty TextFontSizeProperty =
+       BindableProperty.Create(nameof(TextFontSize), typeof(double), typeof(MarkdownView), defaultValue: 12d, propertyChanged: OnMarkdownTextChanged);
+
+    [TypeConverter(typeof(FontSizeConverter))]
+    public double TextFontSize
+    {
+        get => (double)GetValue(TextFontSizeProperty);
+        set => SetValue(TextFontSizeProperty, value);
     }
 
     public static readonly BindableProperty CodeBlockBackgroundColorProperty =
@@ -80,7 +122,7 @@ public class MarkdownView : ContentView
         get => (Color)GetValue(CodeBlockBackgroundColorProperty);
         set => SetValue(CodeBlockBackgroundColorProperty, value);
     }
-    
+
     public static readonly BindableProperty CodeBlockBorderColorProperty =
        BindableProperty.Create(nameof(CodeBlockBorderColor), typeof(Color), typeof(MarkdownView), Colors.BlueViolet, propertyChanged: OnMarkdownTextChanged);
 
@@ -90,6 +132,15 @@ public class MarkdownView : ContentView
         set => SetValue(CodeBlockBorderColorProperty, value);
     }
 
+    public static readonly BindableProperty PlaceholderBackgroundColorProperty =
+     BindableProperty.Create(nameof(PlaceholderBackgroundColor), typeof(Color), typeof(MarkdownView), Colors.White, propertyChanged: OnMarkdownTextChanged);
+
+    public Color PlaceholderBackgroundColor
+    {
+        get => (Color)GetValue(PlaceholderBackgroundColorProperty);
+        set => SetValue(PlaceholderBackgroundColorProperty, value);
+    }
+
     public static readonly BindableProperty CodeBlockTextColorProperty =
        BindableProperty.Create(nameof(CodeBlockTextColor), typeof(Color), typeof(MarkdownView), Colors.BlueViolet, propertyChanged: OnMarkdownTextChanged);
 
@@ -97,6 +148,16 @@ public class MarkdownView : ContentView
     {
         get => (Color)GetValue(CodeBlockTextColorProperty);
         set => SetValue(CodeBlockTextColorProperty, value);
+    }
+
+    public static readonly BindableProperty CodeBlockFontSizeProperty =
+       BindableProperty.Create(nameof(CodeBlockFontSize), typeof(double), typeof(MarkdownView), defaultValue: 12d, propertyChanged: OnMarkdownTextChanged);
+
+    [TypeConverter(typeof(FontSizeConverter))]
+    public double CodeBlockFontSize
+    {
+        get => (double)GetValue(CodeBlockFontSizeProperty);
+        set => SetValue(CodeBlockFontSizeProperty, value);
     }
 
     private static void OnMarkdownTextChanged(BindableObject bindable, object oldValue, object newValue)
@@ -157,7 +218,7 @@ public class MarkdownView : ContentView
                     Text = line[(line.IndexOf(' ') + 1)..].Trim(),
                     TextColor = line.StartsWith("# ") ? H1Color : line.StartsWith("## ") ? H2Color : H3Color,
                     FontAttributes = FontAttributes.Bold,
-                    FontSize = line.StartsWith("# ") ? 24 : line.StartsWith("## ") ? 20 : 18,
+                    FontSize = line.StartsWith("# ") ? H1FontSize : line.StartsWith("## ") ? H2FontSize : H3FontSize,
                     LineBreakMode = LineBreakModeHeader,
                     HorizontalOptions = LayoutOptions.Start,
                     VerticalOptions = LayoutOptions.Center
@@ -181,6 +242,63 @@ public class MarkdownView : ContentView
                 grid.Children.Add(image);
                 Grid.SetColumnSpan(image, 2);
                 Grid.SetRow(image, gridRow++);
+            }
+            else if (line.StartsWith(">"))
+            {
+                var box = new Frame
+                {
+                    Margin = new Thickness(0),
+                    BackgroundColor = CodeBlockBorderColor,
+                    BorderColor = CodeBlockBorderColor,
+                    CornerRadius = 0,
+                    HorizontalOptions = LayoutOptions.Fill,
+                    VerticalOptions = LayoutOptions.Fill
+                };
+
+                var blockQuotelabel = new Label
+                {
+                    FormattedText = CreateFormattedString(line.Substring(1).Trim(), CodeBlockTextColor),
+                    LineBreakMode = LineBreakModeText,
+                    HorizontalOptions = LayoutOptions.StartAndExpand,
+                    VerticalOptions = LayoutOptions.Center,
+                    Padding = new Thickness(5)
+                };
+
+                var blockQuoteGrid = new Grid
+                {
+                    RowSpacing = 0,
+                    ColumnSpacing = 0,
+                    ColumnDefinitions =
+                    {
+                        new ColumnDefinition { Width = 5 }, // For bullet points
+                        new ColumnDefinition { Width = GridLength.Star } // For text
+                    }
+                };
+               
+
+                blockQuoteGrid.Children.Add(box);
+                Grid.SetRow(box, 0);
+                Grid.SetColumn(box, 0);
+
+                blockQuoteGrid.Children.Add(blockQuotelabel);
+                Grid.SetRow(blockQuotelabel, 0);
+                Grid.SetColumn(blockQuotelabel, 1);
+
+                var blockquote = new Frame
+                {
+                    Padding = new Thickness(0),
+                    CornerRadius = 0,
+                    BackgroundColor = CodeBlockBackgroundColor,
+                    BorderColor = CodeBlockBackgroundColor,
+                    Content  = blockQuoteGrid
+                };
+
+                grid.Children.Add(blockquote);
+                Grid.SetColumnSpan(blockquote, 2);
+                Grid.SetRow(blockquote, gridRow++);
+
+               
+
             }
             else if (line.StartsWith("- ") || line.StartsWith("* "))
             {
@@ -256,17 +374,17 @@ public class MarkdownView : ContentView
                 gridRow++;
 
                 // After handling an element, add an empty row for space
-                MarkdownView.AddEmptyRow(grid, ref gridRow);
+                AddEmptyRow(grid, ref gridRow);
             }
         }
 
         Content = grid;
     }
 
-    private static void AddEmptyRow(Grid grid, ref int gridRow)
+    private void AddEmptyRow(Grid grid, ref int gridRow)
     {
         grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(10) }); // Adjust the space as needed
-        var spacer = new BoxView { Color = Colors.Transparent };
+        var spacer = new BoxView { Color = PlaceholderBackgroundColor };
         grid.Children.Add(spacer);
         Grid.SetColumnSpan(spacer, 2);
         Grid.SetRow(spacer, gridRow++);
@@ -283,7 +401,7 @@ public class MarkdownView : ContentView
             Content = new Label
             {
                 Text = codeText.Trim('`', ' '),
-                FontSize = 12,
+                FontSize = CodeBlockFontSize,
                 FontAutoScalingEnabled = true,
                 FontFamily = "Consolas", // Use a monospaced font family
                 TextColor = CodeBlockTextColor, // Use a suitable text color for code
@@ -328,7 +446,8 @@ public class MarkdownView : ContentView
             }
 
             // Apply the same text color for all spans here, or customize as needed.
-            span.TextColor = TextColor;
+            span.TextColor = textColor;
+            span.FontSize = TextFontSize;
 
             formattedString.Spans.Add(span);
         }
