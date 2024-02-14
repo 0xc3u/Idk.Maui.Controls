@@ -61,7 +61,11 @@
             <idk:MarkdownView MarkdownText="# Markdown View for maui.net \n __Sed accusam et dolore clita elitr vero euismod lorem et sanctus sadipscing sed at. Sed nonumy dolor elitr sed voluptua.__  \n ## Abstract \n Amet kasd eos sed sit et duo labore ipsum diam et invidunt eos. Qui ipsum adipiscing dolor enim at ipsum dolore eu amet dolores ea. Tempor erat et eirmod quis dolor labore voluptua eirmod aliquam. Augue accusam **aliquyam ut clita sea**. Dolore ipsum sed diam sed sadipscing duo __ipsum illum__ blandit elitr ea labore. Dolor takimata justo praesent eirmod diam sadipscing duo quod at ipsum dolore molestie lorem consetetur elit molestie et sit. Sed eos doming dolor sit volutpat in quis consetetur molestie et eos ipsum lorem kasd ad elit. Clita sit dolore dolore eos dolores eirmod sit hendrerit magna. Sit magna et consequat. \n ![alt text](https://i.pravatar.cc) \n ### Properties \n Third _Content_ of a nice formatted **markdown** text ! \n **List Elements** \n - Point 1 \n- Point 2 \n- Point 3 \n ```int n = 0;```" 
                           H1Color="{StaticResource Blue100Accent}" 
                           H2Color="{StaticResource Blue200Accent}"
-                          H3Color="{StaticResource Blue300Accent}">
+                          H3Color="{StaticResource Blue300Accent}"
+                          TextColor="{StaticResource Black}"
+                          CodeBlockBackgroundColor="AliceBlue"
+                          CodeBlockTextColor="DarkCyan"
+                          CodeBlockBorderColor="DarkCyan">
             
         </idk:MarkdownView>
         

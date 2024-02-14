@@ -154,7 +154,7 @@ public class MarkdownView : ContentView
             {
                 var label = new Label
                 {
-                    Text = line.Substring(line.IndexOf(' ') + 1).Trim(),
+                    Text = line[(line.IndexOf(' ') + 1)..].Trim(),
                     TextColor = line.StartsWith("# ") ? H1Color : line.StartsWith("## ") ? H2Color : H3Color,
                     FontAttributes = FontAttributes.Bold,
                     FontSize = line.StartsWith("# ") ? 24 : line.StartsWith("## ") ? 20 : 18,
@@ -271,7 +271,7 @@ public class MarkdownView : ContentView
         Grid.SetColumnSpan(spacer, 2);
         Grid.SetRow(spacer, gridRow++);
     }
-
+        
     private Frame CreateCodeBlock(string codeText)
     {
         return new Frame
