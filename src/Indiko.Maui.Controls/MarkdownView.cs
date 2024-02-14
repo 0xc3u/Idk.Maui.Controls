@@ -72,6 +72,33 @@ public class MarkdownView : ContentView
         set => SetValue(TextColorProperty, value);
     }
 
+    public static readonly BindableProperty CodeBlockBackgroundColorProperty =
+       BindableProperty.Create(nameof(CodeBlockBackgroundColor), typeof(Color), typeof(MarkdownView), Colors.LightGray, propertyChanged: OnMarkdownTextChanged);
+
+    public Color CodeBlockBackgroundColor
+    {
+        get => (Color)GetValue(CodeBlockBackgroundColorProperty);
+        set => SetValue(CodeBlockBackgroundColorProperty, value);
+    }
+    
+    public static readonly BindableProperty CodeBlockBorderColorProperty =
+       BindableProperty.Create(nameof(CodeBlockBorderColor), typeof(Color), typeof(MarkdownView), Colors.BlueViolet, propertyChanged: OnMarkdownTextChanged);
+
+    public Color CodeBlockBorderColor
+    {
+        get => (Color)GetValue(CodeBlockBorderColorProperty);
+        set => SetValue(CodeBlockBorderColorProperty, value);
+    }
+
+    public static readonly BindableProperty CodeBlockTextColorProperty =
+       BindableProperty.Create(nameof(CodeBlockTextColor), typeof(Color), typeof(MarkdownView), Colors.BlueViolet, propertyChanged: OnMarkdownTextChanged);
+
+    public Color CodeBlockTextColor
+    {
+        get => (Color)GetValue(CodeBlockTextColorProperty);
+        set => SetValue(CodeBlockTextColorProperty, value);
+    }
+
     private static void OnMarkdownTextChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (MarkdownView)bindable;
@@ -138,13 +165,6 @@ public class MarkdownView : ContentView
                 grid.Children.Add(label);
                 Grid.SetColumnSpan(label, 2);
                 Grid.SetRow(label, gridRow++);
-
-                // Add an empty row for space after the headline
-                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(5) });
-                var spacer = new Frame { BorderColor = Colors.Transparent }; // Transparent BoxView as a spacer
-                grid.Children.Add(spacer);
-                Grid.SetColumnSpan(label, 2);
-                Grid.SetRow(spacer, gridRow++);
             }
             else if (line.StartsWith("!["))
             {
@@ -199,6 +219,14 @@ public class MarkdownView : ContentView
 
                 gridRow++;
             }
+            else if (line.StartsWith("```") && line.EndsWith("```"))
+            {
+                var codeBlock = CreateCodeBlock(line);
+                grid.Children.Add(codeBlock);
+                Grid.SetRow(codeBlock, gridRow);
+                Grid.SetColumnSpan(codeBlock, 2);
+                gridRow++;
+            }
             else // Regular text
             {
                 if (isUnorderedListActive)
@@ -226,10 +254,42 @@ public class MarkdownView : ContentView
                 Grid.SetColumnSpan(label, 2); // Span across both columns for normal text
 
                 gridRow++;
+
+                // After handling an element, add an empty row for space
+                MarkdownView.AddEmptyRow(grid, ref gridRow);
             }
         }
 
         Content = grid;
+    }
+
+    private static void AddEmptyRow(Grid grid, ref int gridRow)
+    {
+        grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(10) }); // Adjust the space as needed
+        var spacer = new BoxView { Color = Colors.Transparent };
+        grid.Children.Add(spacer);
+        Grid.SetColumnSpan(spacer, 2);
+        Grid.SetRow(spacer, gridRow++);
+    }
+
+    private Frame CreateCodeBlock(string codeText)
+    {
+        return new Frame
+        {
+            Padding = new Thickness(10),
+            CornerRadius = 4,
+            BackgroundColor = CodeBlockBackgroundColor,
+            BorderColor = CodeBlockBorderColor,
+            Content = new Label
+            {
+                Text = codeText.Trim('`', ' '),
+                FontSize = 12,
+                FontAutoScalingEnabled = true,
+                FontFamily = "Consolas", // Use a monospaced font family
+                TextColor = CodeBlockTextColor, // Use a suitable text color for code
+                BackgroundColor = Colors.Transparent
+            }
+        };
     }
 
     private FormattedString CreateFormattedString(string line, Color textColor)
@@ -261,10 +321,6 @@ public class MarkdownView : ContentView
                 span.FontAttributes = FontAttributes.Bold;
                 // If you want bold and italic, you can combine flags:
                 // span.FontAttributes = FontAttributes.Bold | FontAttributes.Italic;
-            }
-            else if (part.StartsWith("`") && part.EndsWith("`"))
-            {
-                // Code block handling can go here
             }
             else
             {
