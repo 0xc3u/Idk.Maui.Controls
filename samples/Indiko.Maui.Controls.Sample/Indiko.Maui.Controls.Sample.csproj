@@ -44,6 +44,7 @@
 	  <None Remove="Resources\Images\close.svg" />
 	  <None Remove="Resources\Images\examination_icon.svg" />
 	  <None Remove="Resources\Images\house.svg" />
+	  <None Remove="Resources\Images\sikawild.jpg" />
 	  <None Remove="Resources\Images\user.svg" />
 	</ItemGroup>
 
@@ -64,6 +65,7 @@
 	  <MauiImage Include="Resources\Images\close.svg" />
 	  <MauiImage Include="Resources\Images\examination_icon.svg" />
 	  <MauiImage Include="Resources\Images\house.svg" />
+	  <MauiImage Include="Resources\Images\sikawild.jpg" />
 	  <MauiImage Include="Resources\Images\user.svg" />
 	</ItemGroup>
 </Project>

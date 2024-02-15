@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
+using Microsoft.Maui.Layouts;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 
@@ -229,16 +230,13 @@ public class MarkdownView : ContentView
             }
             else if (line.StartsWith("!["))
             {
-                // Image handling
-                int startIndex = line.IndexOf('(') + 1;
-                int endIndex = line.IndexOf(')', startIndex);
-                string imageUrl = line.Substring(startIndex, endIndex - startIndex);
+                var image = MarkdownView.CreateImageBlock(line);
 
-                var image = new Image
+                if(image==null)
                 {
-                    Source = ImageSource.FromUri(new Uri(imageUrl)),
-                    Aspect = Aspect.AspectFit
-                };
+                    continue;
+                }
+
                 grid.Children.Add(image);
                 Grid.SetColumnSpan(image, 2);
                 Grid.SetRow(image, gridRow++);
@@ -389,7 +387,47 @@ public class MarkdownView : ContentView
         Grid.SetColumnSpan(spacer, 2);
         Grid.SetRow(spacer, gridRow++);
     }
-        
+    
+    private static Image CreateImageBlock(string line)
+    {
+        try
+        {
+            // Image handling
+            int startIndex = line.IndexOf('(') + 1;
+            int endIndex = line.IndexOf(')', startIndex);
+            string imageUrl = line.Substring(startIndex, endIndex - startIndex);
+
+            ImageSource imageSource = default;
+
+            // check if imageUrl is a base64 string
+            if (IsValidBase64String(imageUrl))
+            {
+                byte[] imageBytes = Convert.FromBase64String(imageUrl);
+                imageSource = ImageSource.FromStream(() => new MemoryStream(imageBytes));
+            }
+            else if (Uri.TryCreate(imageUrl, UriKind.Absolute, out Uri uriResult))
+            {
+                imageSource = ImageSource.FromUri(uriResult);
+            }
+            else
+            {
+                imageSource = ImageSource.FromFile(imageUrl);
+            }
+
+            var image = new Image
+            {
+                Source = imageSource,
+                Aspect = Aspect.AspectFit
+            };
+
+            return image;
+        }catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        return default;
+    }
+
     private Frame CreateCodeBlock(string codeText)
     {
         return new Frame
@@ -453,5 +491,18 @@ public class MarkdownView : ContentView
         }
 
         return formattedString;
+    }
+
+
+    private static bool IsValidBase64String(string input)
+    {
+        if (string.IsNullOrEmpty(input) || input.Length % 4 != 0)
+        {
+            return false;
+        }
+
+        // Check if the string contains only valid Base64 characters including padding character '='.
+        const string base64Pattern = "^[a-zA-Z0-9\\+/]*={0,3}$";
+        return Regex.IsMatch(input, base64Pattern);
     }
 }
