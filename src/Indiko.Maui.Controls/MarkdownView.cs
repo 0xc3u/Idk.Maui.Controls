@@ -177,6 +177,8 @@ public class MarkdownView : ContentView
 
         var grid = new Grid
         {
+            Margin = new Thickness(0,0,0,0),
+            Padding = new Thickness(0, 0, 0, 0),
             RowSpacing = 2,
             ColumnDefinitions =
             {
